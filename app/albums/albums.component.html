@@ -1,0 +1,45 @@
+
+      <app-search (searchChanged)="onSearchChanged($event)"></app-search>
+
+
+<div class="row content">
+
+      <div class="col-sm-4 video">
+            <!-- AlbumDetails communication parent vers enfant -->
+            <app-album-details [album]="selectedAlbum" (onPlay)="playParent($event)">
+            </app-album-details>
+      </div>
+
+      <div class="col-sm-8">
+            <h1 class="fs-1 fw-bold">{{ titlePage }}</h1>
+            <div class="card mb-2 shadow p-4 mb-4 bg-white" *ngFor="let album of albums">
+                  <div class="card-header bg-dark text-light fw-bold">
+                        {{album.ref}}
+                  </div>
+                  <div class="card-body"  *ngFor="let album of filteredAlbums">
+                        <h1>
+                              <span *ngIf="selectedAlbum === album" class="text-dark"><i
+                                          class="fas fa-pause-circle"></i></span>
+                              {{ album.title }}
+                        </h1>
+                        <h5 class="card-title fw-semibold"> {{album.title}} </h5>
+                        <p class="card-text">{{album.description}}</p>
+                        <ul class="list-group list-group-horizontal mb-3 col-sm-3 fw-bold" style="font-size: 0.6rem;">
+                              <li class="list-group-item list-group-item-action list-group-item-info mx-1 rounded"
+                                    *ngFor="let tag of album.tags"> {{tag}}
+                              </li>
+                        </ul>
+                        <a class="btn btn-outline-dark fw-semibold px-4 py-2 border-2" href="#" role="button">En</a>
+                        <img class="glyph-icon mx-1 img-fluid" width="20px" height="auto"
+                              src="../assets/svg/si-glyph-heart.svg" />
+                        <small>{{album.like}}</small>
+                        <img class="glyph-icon mx-1 img-fluid" width="20px" height="auto"
+                              src="../assets/svg/si-glyph-timer.svg" />
+                        <small class="fw-semibold">{{album.duration}} min</small>
+                        <a class="btn btn-dark fw-semibold px-4 py-2 mx-2" href="#" role="button"
+                              (click)="onSelect(album)">Details</a>
+                  </div>
+            </div>
+      </div>
+
+</div>
